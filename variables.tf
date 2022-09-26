@@ -236,3 +236,11 @@ variable "locust_exporter" {
   }
   description = "Export locust result to prometheus"
 }
+
+variable "suspend" {
+  description = "Terminate every nodes"
+  type        = bool
+  default     = false
+}
+
+
