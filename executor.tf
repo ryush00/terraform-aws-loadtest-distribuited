@@ -1,7 +1,7 @@
 locals {
   auto_execute = var.auto_execute
 
-  leader_private_ip = aws_instance.leader.private_ip
+  leader_private_ip = var.suspend ? "" : aws_instance.leader.private_ip
 
   executors = {
     jmeter = {
