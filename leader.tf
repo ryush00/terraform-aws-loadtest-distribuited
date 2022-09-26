@@ -1,4 +1,5 @@
 resource "aws_instance" "leader" {
+  count = var.suspend ? 0 : 1
 
   ami = local.leader_ami_id
 
