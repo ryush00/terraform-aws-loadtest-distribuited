@@ -66,7 +66,7 @@ resource "null_resource" "spliter_execute_command" {
 
   # CONNECT TO LEADER
   connection {
-    host        = var.suspend ? "" : coalesce(aws_instance.leader.public_ip, aws_instance.leader.private_ip)
+    host        = coalesce(aws_instance.leader[0].public_ip, aws_instance.leader[0].private_ip)
     type        = "ssh"
     user        = var.ssh_user
     private_key = tls_private_key.loadtest.private_key_pem
