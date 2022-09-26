@@ -107,7 +107,7 @@ resource "null_resource" "setup_nodes" {
 
 resource "null_resource" "executor" {
 
-  count = local.auto_execute ? 1 : 0
+  count = !var.suspend && local.auto_execute ? 1 : 0
 
   depends_on = [
     aws_instance.leader,
@@ -117,7 +117,7 @@ resource "null_resource" "executor" {
   ]
 
   connection {
-    host        = coalesce(aws_instance.leader[0].public_ip, aws_instance.leader[0].private_ip)
+    host        = var.suspend ? "" : coalesce(aws_instance.leader[0].public_ip, aws_instance.leader[0].private_ip)
     type        = "ssh"
     user        = var.ssh_user
     private_key = tls_private_key.loadtest.private_key_pem
