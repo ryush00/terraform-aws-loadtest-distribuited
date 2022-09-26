@@ -1,6 +1,6 @@
 resource "aws_instance" "nodes" {
 
-  count = var.nodes_size
+  count = var.suspend ? 0 : var.nodes_size
 
   ami           = local.nodes_ami_id
   instance_type = var.nodes_instance_type
